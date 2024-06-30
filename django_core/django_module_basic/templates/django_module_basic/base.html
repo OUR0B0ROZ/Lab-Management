@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Model List{% endblock %}</title>
+    <style>
+        /* Basic Reset */
+        ul {
+            padding: 0;
+            list-style-type: none;
+        }
+
+        /* Horizontal Menu */
+        .menu {
+            display: flex;
+            gap: 20px;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .menu > li {
+            position: relative;
+        }
+
+        .menu > li > a {
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #dee2e6;
+        }
+
+        .menu > li > a:hover {
+            background-color: #e9ecef;
+        }
+
+        /* Dropdown Menu */
+        .menu > li > ul {
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .menu > li:hover > ul {
+            display: block;
+        }
+
+        .menu > li > ul > li {
+            padding: 5px;
+        }
+
+        .menu > li > ul > li > a {
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            color: #333;
+        }
+
+        .menu > li > ul > li > a:hover {
+            background-color: #f8f9fa;
+        }
+
+        .auth-links {
+            margin-left: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="menu">
+                <li>
+                    <a href="{% url 'django_module_basic:model-list' %}">Users</a>
+                    <ul>
+                        <li><a href="{% url 'django_module_basic:model-list' %}">All Categories</a></li>
+                        {% for category in categories %}
+                            <li><a href="{% url 'django_module_basic:model-list-by-category' category.slug %}">{{ category.title }}</a></li>
+                        {% endfor %}
+                        <li><a href="{% url 'django_module_basic:model-create' %}">Create New Model</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{% url 'django_module_basic:area-list' %}">Areas</a>
+                    <ul>
+                        <li><a href="{% url 'django_module_basic:area-list' %}">All Areas</a></li>
+                        {% for area in areas %}
+                            <li><a href="{% url 'django_module_basic:area-detail' area.pk %}">{{ area.area_of_use }}</a></li>
+                        {% endfor %}
+                        <li><a href="{% url 'django_module_basic:area-create' %}">Create New Area</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{% url 'django_module_basic:class-list' %}">Classes</a>
+                    <ul>
+                        <li><a href="{% url 'django_module_basic:class-list' %}">All Classes</a></li>
+                        {% for class in classes %}
+                            <li><a href="{% url 'django_module_basic:class-detail' class.pk %}">{{ class.class_name }}</a></li>
+                        {% endfor %}
+                        <li><a href="{% url 'django_module_basic:class-create' %}">Create New Class</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{% url 'django_module_basic:group-list' %}">Groups</a>
+                    <ul>
+                        <li><a href="{% url 'django_module_basic:group-list' %}">All Groups</a></li>
+                        {% for group in groups %}
+                            <li><a href="{% url 'django_module_basic:group-detail' group.pk %}">{{ group.group_name }}</a></li>
+                        {% endfor %}
+                        <li><a href="{% url 'django_module_basic:group-create' %}">Create New Group</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{% url 'django_module_basic:area-list' %}"">Reports</a>
+                    <ul>
+                    <li><a href="{% url 'django_module_basic:area-list' %}">All Areas</a></li>
+                   
+                        {% for area in areas %}
+                            <li><a href="{% url 'django_module_basic:users_per_area' area.pk %}">User Per Area Report for {{ area.area_of_use }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li>
+                <a href="{% url 'django_module_basic:records' %}"">Record</a>
+                <ul>
+                <li>
+                <a href="{% url 'django_module_basic:records' %}">All records</a>
+                </li>
+                </ul>
+                </li>
+                
+                <li>
+                    <a  href="{% url 'report:check-in' %}" >Check In/Out</a>
+                    <ul>
+                        <li><a href="{% url 'report:check-in' %}">Check In</a></li>
+                        <li><a href="{% url 'report:check-out' %}">Check Out</a></li>
+                    </ul>
+                </li>
+                <li class="auth-links">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'django_module_basic:logout' %}">Logout</a>
+                    {% else %}
+                        <a href="{% url 'django_module_basic:login' %}">Login</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

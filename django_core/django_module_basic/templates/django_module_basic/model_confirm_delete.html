@@ -1,0 +1,13 @@
+{% extends 'django_module_basic/base.html' %}
+
+{% block title %}Delete Model{% endblock %}
+
+{% block content %}
+    <h2>Delete Model</h2>
+    <p>Are you sure you want to delete "{{ model.title }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, delete</button>
+        <a href="{% url 'django_module_basic:model-list' %}">Cancel</a>
+    </form>
+{% endblock %}

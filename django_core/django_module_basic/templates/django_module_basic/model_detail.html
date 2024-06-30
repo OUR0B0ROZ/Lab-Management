@@ -1,0 +1,11 @@
+{% extends 'django_module_basic/base.html' %}
+
+{% block title %}{{ model.title }}{% endblock %}
+
+{% block content %}
+    <p>First name:{{ model.first_name }}</p>
+    <p>Last name:{{ model.last_name }}</p>
+    <p>Category: {{ model.category.title }}</p>
+    <p>Created: {{ model.created }}</p>
+    <p>Code: {{ model.code }}</p>
+{% endblock %}

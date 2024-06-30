@@ -1,0 +1,15 @@
+{% extends 'django_module_basic/base.html' %}
+
+
+{% block title %}Class List{% endblock %}
+
+{% block content %}
+  <h2>Classes</h2>
+  <ul>
+    {% for class in classes %}
+      <li><a href="{% url 'django_module_basic:class-detail' class.pk %}">{{ class.class_name }}</a></li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'django_module_basic:class-create' %}">Add New Class</a>
+{% endblock %}
+                                                                                                                                 

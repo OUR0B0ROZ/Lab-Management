@@ -1,0 +1,10 @@
+{% extends "django_module_basic/base.html" %}
+
+{% block content %}
+  <h2>Are you sure you want to delete "{{ area.area_of_use }}"?</h2>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirm</button>
+  </form>
+  <a href="{% url 'django_module_basic:area-detail' area.pk %}">Cancel</a>
+{% endblock %}

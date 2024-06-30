@@ -1,0 +1,7 @@
+{% extends "django_module_basic/base.html" %}
+
+{% block content %}
+  <h2>{{ area.area_of_use }}</h2>
+  <a href="{% url 'django_module_basic:area-update' area.pk %}">Edit</a> |
+  <a href="{% url 'django_module_basic:area-delete' area.pk %}">Delete</a>
+{% endblock %}

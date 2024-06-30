@@ -1,0 +1,9 @@
+{% extends 'django_module_basic/base.html' %}
+
+{% block title %}Class Detail{% endblock %}
+
+{% block content %}
+  <h2>{{ group.group_name }}</h2>
+  <a href="{% url 'django_module_basic:group-update' group.pk %}">Edit</a> |
+  <a href="{% url 'django_module_basic:group-delete' group.pk %}">Delete</a>
+ {% endblock %}

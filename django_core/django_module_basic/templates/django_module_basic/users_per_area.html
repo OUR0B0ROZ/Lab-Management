@@ -1,0 +1,16 @@
+{% extends 'django_module_basic/base.html' %}
+{% block title %}Users in area {{ area.area_of_use }}{% endblock %}
+{% block content %}
+<h1>Users in {{ area.area_of_use }}</h1>
+<h2>Total Users: {{ total_user_count }}</h2>
+{% for category, data in users_by_category.items %}
+  <h2>Category: {{ category }} ({{ data.count }} users)</h2>
+  <ul>
+    {% for user, class_model in data.users %}
+      <li>{{ user.first_name }} {{ user.last_name }} - {{ class_model }}</li>
+    {% endfor %}
+  </ul>
+{% endfor %}
+<a href="{% url 'django_module_basic:area-list' %}">Back to Areas</a>
+{% endblock %}
+                                                                 

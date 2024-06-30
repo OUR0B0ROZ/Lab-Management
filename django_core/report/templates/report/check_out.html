@@ -1,0 +1,25 @@
+{% extends "report/base.html" %}
+
+{% block title %}Check Out{% endblock %}
+
+{% block content %}
+<h1>Check Out</h1>
+    
+{% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                {{ message }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Check Out</button>
+</form>
+
+<a href="{% url 'django_module_basic:area-list' %}">Back to Areas</a>
+{% endblock %}

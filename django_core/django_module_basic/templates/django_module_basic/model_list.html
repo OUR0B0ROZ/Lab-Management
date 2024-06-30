@@ -1,0 +1,40 @@
+{% extends 'django_module_basic/base.html' %}
+
+{% block title %}Model List{% endblock %}
+
+{% block content %}
+
+<h1>Model Tests by Category</h1>
+{% for category in categories_with_models %}
+    <h2>{{ category.title }}</h2>
+    <ul>
+        {% for model_test in category.models.all %}
+            <li>{{ model_test.first_name }} {{ model_test.last_name }}</li>
+            <a href="{% url 'django_module_basic:detail' model_test.pk %}">Detail</a>
+            - <a href="{% url 'django_module_basic:model-update' model_test.pk %}">Update</a>
+            - <a href="{% url 'django_module_basic:model-delete' model_test.pk %}">Delete</a>
+        {% empty %}
+            <li>No users in this category.</li>
+        {% endfor %}
+    </ul>
+{% endfor %}
+
+    <!-- Pagination Controls -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}

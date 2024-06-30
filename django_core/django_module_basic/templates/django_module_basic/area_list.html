@@ -1,0 +1,16 @@
+{% extends "django_module_basic/base.html" %}
+
+{% block title %}Area List{% endblock %}
+
+{% block content %}
+  <h2>Area List</h2>
+  <ul>
+    <a href="{% url 'django_module_basic:area-create' %}">Create area</a>
+    {% for area in areas %}
+      <li><a href="{% url 'django_module_basic:area-detail' area.pk %}">{{ area.area_of_use }}</a></li>
+      <a href="{% url 'django_module_basic:area-update' area.pk %}">Edit</a> |
+      <a href="{% url 'django_module_basic:area-delete' area.pk %}">Delete</a>
+      <a href="{% url 'django_module_basic:users_per_area' area.pk %}">User Report</a>
+    {% endfor %}
+  </ul>
+{% endblock %}

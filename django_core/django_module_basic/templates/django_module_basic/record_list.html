@@ -1,0 +1,29 @@
+{% extends 'django_module_basic/base.html' %}
+
+{% block title %}Records of Arrivals and Departures{% endblock %}
+
+{% block content %}
+<h1>Records of Arrivals and Departures</h1>
+<table>
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Arrival Time</th>
+            <th>Departure Time</th>
+            <th>Class</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for record in records %}
+        <tr>
+            <td>{{ record.user.first_name }}</td>
+            <td>{{ record.user.last_name }}</td>
+            <td>{{ record.arrival_time|date:"F j, Y, g:i a" }}</td>
+            <td>{{ record.departure_time|date:"F j, Y, g:i a" }}</td>
+            <td>{{ record.class_model }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

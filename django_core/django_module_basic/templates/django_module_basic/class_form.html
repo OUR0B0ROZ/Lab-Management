@@ -1,0 +1,12 @@
+{% extends 'django_module_basic/base.html' %}
+
+{% block title %}Create or Update Class{% endblock %}
+
+{% block content %}
+  <h2>{% if form.instance.pk %}Edit Class{% else %}Create Class{% endif %}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+  </form>
+{% endblock %}
